@@ -36,7 +36,7 @@ namespace EF.Language.FormsAPI5
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                await context.Response.WriteAsync("Controller not found or wrong method used !");
             });
         }
 
