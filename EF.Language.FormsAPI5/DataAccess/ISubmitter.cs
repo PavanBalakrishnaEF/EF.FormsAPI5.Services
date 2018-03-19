@@ -1,4 +1,4 @@
-﻿using EF.Language.FormsAPI5.Model;
+﻿using EF.Language.AWS.Kinesis.Models.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,6 @@ namespace EF.Language.FormsAPI5.DataAccess
     public interface IFormSubmitter
     {
         string SubmitTester();
-        string SubmitBrochure(KinesisModel model);
+        string SubmitBrochure(KinesisFormDataModel model);
     }
 }

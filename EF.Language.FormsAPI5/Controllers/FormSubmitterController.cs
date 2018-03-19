@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using EF.Language.FormsAPI5.DataAccess;
-using EF.Language.FormsAPI5.Model;
+using EF.Language.AWS.Kinesis.Models.Forms;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -45,9 +45,9 @@ namespace EF.Language.FormsAPI5.Controllers
             try
             {
 
-                
-                KinesisModel formModel = Newtonsoft.Json.JsonConvert.DeserializeObject<KinesisModel>(formdata.ToString());
-                System.IO.File.AppendAllText("Log.log", string.Format("Form enter - {0}", formModel.FormSessionID.ToString()));
+
+                KinesisFormDataModel formModel = Newtonsoft.Json.JsonConvert.DeserializeObject<KinesisFormDataModel>(formdata.ToString());
+                System.IO.File.AppendAllText("Log.log", string.Format("Form enter - {0}", formModel.SessionId.ToString()));
                 return _formsubmitter.SubmitBrochure(formModel);
 
 

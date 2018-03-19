@@ -19,6 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="EF.Language.AWS.Kinesis">
+      <HintPath>..\lib\EF.Language.AWS.Kinesis.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 

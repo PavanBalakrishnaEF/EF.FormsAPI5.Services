@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
-using EF.Language.FormsAPI5.Model;
 using Microsoft.Extensions.Configuration;
+using EF.Language.AWS.Kinesis.Models.Forms;
 
 namespace EF.Language.FormsAPI5.DataAccess
 {
@@ -38,7 +38,7 @@ namespace EF.Language.FormsAPI5.DataAccess
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public string SubmitBrochure(KinesisModel model)
+        public string SubmitBrochure(KinesisFormDataModel model)
         {
 
             string FormID;
@@ -60,14 +60,14 @@ namespace EF.Language.FormsAPI5.DataAccess
                 command.Parameters.AddWithValue("@email", model.Fields.WebFormData.Email);
                 command.Parameters.AddWithValue("@mobileEmail", string.Empty);
 
-                if (model.Fields.WebFormData.PhoneType=="MP")
+                if (!string.IsNullOrWhiteSpace(model.Fields.WebFormData.MobilePhone))
                 {
                     command.Parameters.AddWithValue("@homePhone", string.Empty);
-                    command.Parameters.AddWithValue("@mobilePhone", model.Fields.WebFormData.PhoneNumber);
+                    command.Parameters.AddWithValue("@mobilePhone", model.Fields.WebFormData.MobilePhone);
                 }
                 else
                 {
-                    command.Parameters.AddWithValue("@homePhone", model.Fields.WebFormData.PhoneNumber);
+                    command.Parameters.AddWithValue("@homePhone", model.Fields.WebFormData.HomePhone);
                     command.Parameters.AddWithValue("@mobilePhone", string.Empty);
                 }
 
@@ -103,8 +103,8 @@ namespace EF.Language.FormsAPI5.DataAccess
                 command.Parameters.AddWithValue("@parentPhone", model.Fields.WebFormData.ParentsPhoneNo);
                 command.Parameters.AddWithValue("@ParentType", model.Fields.WebFormData.ParentType);
                 command.Parameters.AddWithValue("@companyName", model.Fields.WebFormData.CompanyName);
-                command.Parameters.AddWithValue("@enqFormId", model.Fields.WebFormData.EnqFormId);
-                command.Parameters.AddWithValue("@enqFormType", model.Fields.WebFormData.EnqFormType);
+                command.Parameters.AddWithValue("@enqFormId", model.Fields.WebFormData.EnquiryFormId);
+                command.Parameters.AddWithValue("@enqFormType", model.Fields.WebFormData.EnquiryFormType);
                 command.Parameters.AddWithValue("@partnerCode", model.Fields.WebFormData.PartnerCode);
                 command.Parameters.AddWithValue("@eTag", model.Fields.WebFormData.Etag);
                 command.Parameters.AddWithValue("@rawEtag", model.Fields.WebFormData.RawEtag);
@@ -116,10 +116,10 @@ namespace EF.Language.FormsAPI5.DataAccess
                 command.Parameters.AddWithValue("@visitId", Guid.Empty);
                 command.Parameters.AddWithValue("@externalReferringUrl", model.Fields.WebFormData.ExternalReferringUrl);
                 command.Parameters.AddWithValue("@entryPage", DBNull.Value);
-                command.Parameters.AddWithValue("@divisionCode", model.Fields.WebFormData.DivisionCode);
-                command.Parameters.AddWithValue("@customerActivityTypeCode", model.Fields.WebFormData.CustomerActivityTypeCode);
+                command.Parameters.AddWithValue("@divisionCode", DBNull.Value);
+                command.Parameters.AddWithValue("@customerActivityTypeCode", string.Empty);
                 command.Parameters.AddWithValue("@activityFrom", model.Fields.WebFormData.ActivityFrom);
-                command.Parameters.AddWithValue("@isUnsolicited", model.Fields.WebFormData.IsUnsolicited);
+                command.Parameters.AddWithValue("@isUnsolicited", DBNull.Value);
 
                 command.Parameters.AddWithValue("@postData", DBNull.Value);
                 command.Parameters.AddWithValue("@state", model.Fields.WebFormData.State);
