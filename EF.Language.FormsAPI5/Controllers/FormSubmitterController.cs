@@ -45,7 +45,7 @@ namespace EF.Language.FormsAPI5.Controllers
             try
             {
 
-
+                System.IO.File.AppendAllText("Log.log", string.Format("Form data - {0}", formdata.ToString()));
                 KinesisFormDataModel formModel = Newtonsoft.Json.JsonConvert.DeserializeObject<KinesisFormDataModel>(formdata.ToString());
                 System.IO.File.AppendAllText("Log.log", string.Format("Form enter - {0}", formModel.SessionId.ToString()));
                 return _formsubmitter.SubmitBrochure(formModel);

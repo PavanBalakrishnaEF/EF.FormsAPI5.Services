@@ -48,6 +48,8 @@ namespace EF.Language.FormsAPI5.DataAccess
 
             try
             {
+
+                command.Parameters.AddWithValue("@FormEntryID", model.SessionId);
                 command.Parameters.AddWithValue("@productCode", model.Fields.WebFormData.ProductCode);
                 command.Parameters.AddWithValue("@programCode", model.Fields.WebFormData.ProgramCode);
                 command.Parameters.AddWithValue("@secondaryProductCode", string.Empty);
@@ -93,7 +95,7 @@ namespace EF.Language.FormsAPI5.DataAccess
                 command.Parameters.AddWithValue("@gender", model.Fields.WebFormData.Gender);
                 command.Parameters.AddWithValue("@comments", model.Fields.WebFormData.Comments);
                 command.Parameters.AddWithValue("@userSelectedSourceCode", model.Fields.WebFormData.UserSelectedSourceCode);
-                command.Parameters.AddWithValue("@wantsMoreInfo", model.Fields.WebFormData.WantsMoreInfo);
+                command.Parameters.AddWithValue("@wantsMoreInfo", model.Fields.WebFormData.YesEmailMarketting ?? false);
                 command.Parameters.AddWithValue("@wantsBrochure", model.Fields.WebFormData.WantsBrochure??false);
                 command.Parameters.AddWithValue("@agents", string.Empty);
                 command.Parameters.AddWithValue("@isParent", model.Fields.WebFormData.IsParents??false);
